@@ -1,0 +1,59 @@
+﻿<Page x:Class="masterAndFloorApp.RealisationHistoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:masterAndFloorApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RealisationHistoryPage" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="История реализации продукции партнером" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+        <!-- Фильтрация по партнеру и дате -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
+            <WrapPanel Orientation="Horizontal">
+                <CheckBox IsChecked="False" Name="IsFilter"></CheckBox>
+                <Label Content="Фильтровать"/>
+            </WrapPanel>
+            <Label Content="Выберите партнера:"/>
+            <ComboBox Name="CBPartners" 
+              Width="200" 
+              SelectionChanged="CBPartners_SelectionChanged" 
+              DisplayMemberPath="Title" 
+              SelectedValuePath="PartnerID" />
+            <Label Content="Дата от:"/>
+            <DatePicker Name="DPStartDate" Width="150" Margin="5,0"/>
+            <Label Content="Дата до:"/>
+            <DatePicker Name="DPEndDate" Width="150" Margin="5,0"/>
+            <Button Content="Фильтровать" Click="BtnFilter_Click" Width="100" Margin="5,0"/>
+        </StackPanel>
+
+        <DataGrid x:Name="DGridPartnerProducts" AutoGenerateColumns="False" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер" Binding="{Binding PartnerProductsID}"/>
+                <DataGridTextColumn Header="Продукция" Binding="{Binding Product.Title}"/>
+                <DataGridTextColumn Header="Партнер" Binding="{Binding Partner.Title}"/>
+                <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="BtnEdit" Content="Изменить" Click="BtnEdit_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--Кнопка удаления записи-->
+        <Button Content="Удалить" Grid.Row="2" Name="DeleteBtn" HorizontalAlignment="Left" Height="40" Click="DeleteBtn_Click" Template="{StaticResource ButtonTemplate}"/>
+        <Button x:Name="BtnCreate" Content="Создать" Click="BtnCreate_Click" Grid.Row="2" HorizontalAlignment="Right"></Button>
+    </Grid>
+</Page>

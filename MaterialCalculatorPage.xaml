@@ -1,0 +1,54 @@
+﻿<Page x:Class="masterAndFloorApp.MaterialCalculatorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:masterAndFloorApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MaterialCalculatorPage">
+
+    <Grid Margin="20" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Тип продукции -->
+            <RowDefinition Height="Auto"/>
+            <!-- Тип материала -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кол-во продукции -->
+            <RowDefinition Height="Auto"/>
+            <!-- Коэффициент -->
+            <RowDefinition Height="Auto"/>
+            <!-- Процент брака -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопка -->
+            <RowDefinition Height="Auto"/>
+            <!-- Результат -->
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Тип продукции:" />
+        <ComboBox x:Name="ProductTypeComboBox" Grid.Row="0" Margin="150,0,0,5" Width="200"
+                  DisplayMemberPath="Title" SelectedValuePath="ProductTypeID"
+                  SelectionChanged="ProductTypeComboBox_SelectionChanged"/>
+
+        <TextBlock Text="Тип материала:" Grid.Row="1"/>
+        <ComboBox x:Name="MaterialTypeComboBox" Grid.Row="1" Margin="150,0,0,5" Width="200"
+                  DisplayMemberPath="Title" SelectedValuePath="MaterialTypeID"
+                  SelectionChanged="MaterialTypeComboBox_SelectionChanged"/>
+
+        <TextBlock Text="Количество продукции:" Grid.Row="2"/>
+        <TextBox x:Name="QuantityTextBox" Grid.Row="2" Margin="150,0,0,5" Width="200"/>
+
+        <TextBlock Text="Коэффициент продукции:" Grid.Row="3"/>
+        <TextBox x:Name="CoefficientTextBox" Grid.Row="3" Margin="150,0,0,5" Width="200"/>
+
+        <TextBlock Text="Процент брака материала:" Grid.Row="4"/>
+        <TextBox x:Name="DefectRateTextBox" Grid.Row="4" Margin="150,0,0,5" Width="200"/>
+
+        <Button Grid.Row="5" Content="Рассчитать" Width="120" Height="30" Margin="0,10,0,0"
+                HorizontalAlignment="Left" Click="CalculateButton_Click"/>
+
+        <TextBlock x:Name="ResultTextBlock" Grid.Row="6" Margin="0,20,0,0" FontWeight="Bold"
+                   FontSize="14" TextWrapping="Wrap"/>
+    </Grid>
+</Page>
