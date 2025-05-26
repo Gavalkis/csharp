@@ -1,4 +1,4 @@
-﻿<Page x:Class="masterAndFloorApp.RealisationHistoryPage"
+<Page x:Class="masterAndFloorApp.RealisationHistoryPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -20,7 +20,7 @@
         <TextBlock Text="История реализации продукции партнером" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
         <WrapPanel Orientation="Horizontal" Grid.Row="1">
-            <CheckBox IsChecked="False" Name="IsFilter"></CheckBox>
+            <CheckBox IsChecked="False" Name="IsFilter" Click="IsFilter_Click"  ></CheckBox>
             <Label Content="Фильтровать"/>
         </WrapPanel>
         <!-- Фильтрация по партнеру и дате -->
@@ -38,7 +38,7 @@
             <Button Content="Фильтровать" Click="BtnFilter_Click" Width="100" Height="25" Margin="5,0" Template="{StaticResource ButtonTemplate}"/>
         </StackPanel>
 
-        <DataGrid x:Name="DGridPartnerProducts" AutoGenerateColumns="False" Grid.Row="3">
+        <DataGrid x:Name="DGridPartnerProducts" AutoGenerateColumns="False" Grid.Row="3" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Binding="{Binding PartnerProductsID}"/>
                 <DataGridTextColumn Header="Продукция" Binding="{Binding Product.Title}"/>
