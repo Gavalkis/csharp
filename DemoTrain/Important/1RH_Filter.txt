@@ -1,0 +1,34 @@
+public RealisationHistory()
+{
+    InitializeComponent();
+    CBPartners.ItemsSource = masterAndFloorEntities.GetContext().Partners.ToList();
+    DGridPartnerProducts.ItemsSource = masterAndFloorEntities.GetContext().PartnerProducts.ToList();
+}
+
+public void FilterHistory()
+{
+    var selectedPartner = CBPartners.SelectedItem as Partner;
+    
+    DateTime? startDate = DPStartDate.SelectedDate;
+    DateTime? endDate = DPEndDate.SelectedDate;
+
+    var requiredPartnerProducts = masterAndFloorEntities.GetContext().PartnerProducts.AsQueryable();
+
+    if(selectedPartner != null)
+    {
+        requiredPartnerProducts = requiredPartnerProducts.Where(p => p.PartnerID == selectedPartner.PartnerID);
+    }
+    if (startDate.HasValue)
+    {
+        requiredPartnerProducts = requiredPartnerProducts.Where(p => p.Date >= startDate.Value);
+    }
+    if (endDate.HasValue)
+    {
+        requiredPartnerProducts = requiredPartnerProducts.Where(p => p.Date <= endDate.Value);
+    }
+    if(IsFilter.IsChecked == false)
+    {
+        requiredPartnerProducts = masterAndFloorEntities.GetContext().PartnerProducts.AsQueryable();
+    }
+    DGridPartnerProducts.ItemsSource = requiredPartnerProducts.ToList();
+}
