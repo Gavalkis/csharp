@@ -45,7 +45,7 @@ namespace masterAndFloorApp
             }
             if (endDate.HasValue)
             {
-                filteredProducts = filteredProducts.Where(pp => pp.Date == endDate.Value);
+                filteredProducts = filteredProducts.Where(pp => pp.Date <= endDate.Value);
             }
             if (IsFilter.IsChecked == false)
             {
