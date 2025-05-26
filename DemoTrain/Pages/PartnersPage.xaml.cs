@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +28,14 @@ namespace masterAndFloorApp
             PartnersItemsControl.ItemsSource = masterAndFloorEntities1.GetContext().Partners.ToList();
         }
 
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(sender as Border != null)
+            {
+                NavigationService.Navigate(new AddEditPage((sender as Border).DataContext as Partner));
+            }
+        }
+
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             NavigationClass.MainFrame.Navigate(new AddEditPage(null));
@@ -42,9 +50,8 @@ namespace masterAndFloorApp
         {
             if(Visibility == Visibility.Visible)
             {
-                
                 CalculateDiscounts();
-                masterAndFloorEntities1.GetContext().ChangeTracker.Entries().ToList().ForEach(a => a.Reload());
+                masterAndFloorEntities1.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
                 PartnersItemsControl.ItemsSource = masterAndFloorEntities1.GetContext().Partners.ToList();
             }   
         }
@@ -78,32 +85,7 @@ namespace masterAndFloorApp
             }
             
         }
-
-        private float CalculateDiscount(long totalQuantity)
-        {
-            if (totalQuantity < 10000)
-                return 0f; // 0% скидка
-            else if (totalQuantity < 50000)
-                return 5f; // 5% скидка
-            else if (totalQuantity < 300000)
-                return 10f; // 10% скидка
-            else
-                return 15f; // 15% скидка
-        }
-
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var border = sender as Border;
-            if (border != null)
-            {
-                // Получаем данные о партнере из DataContext
-                var partner = border.DataContext as Partner; // Замените Partner на ваш класс модели
-
-                // Переход на страницу AddEdit с передачей данных о партнере
-                var addEditPage = new AddEditPage(partner); // Предполагается, что у вас есть конструктор, принимающий партнера
-                NavigationService.Navigate(addEditPage);
-            }
-        }
+        
 
     }
 }
