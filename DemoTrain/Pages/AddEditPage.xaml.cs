@@ -66,7 +66,7 @@ namespace masterAndFloorApp
                 err.AppendLine("Укажите ИНН");
             if (string.IsNullOrWhiteSpace(_currentPartner.Rating.ToString()))
                 err.AppendLine("Укажите Рейтинг");
-            if (_currentPartner.Rating / 10 != 0)
+            if (_currentPartner.Rating % 1 != 0)
                 err.AppendLine("Укажите целое значение рейтинга");
             if (_currentPartner.Rating < 0)
                 err.AppendLine("Укажите не отрицательное  значение рейтинга");
